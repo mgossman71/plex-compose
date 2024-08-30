@@ -243,26 +243,26 @@ volumes:
   Movies:
     driver_opts:
       type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume1/Movies"
+      o: "addr=truenas01,nolock,soft,rw"
+      device: ":/mnt/DataPool0/Movies"
 
   TV-Shows:
     driver_opts:
       type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume1/TV-Shows"
+      o: "addr=truenas01,nolock,soft,rw"
+      device: ":/mnt/DataPool0/TV-Shows"
 
   TV-Shows1:
     driver_opts:
       type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume1/TV-Shows1"
+      o: "addr=truenas01,nolock,soft,rw"
+      device: ":/mnt/DataPool0/TV-Shows1"
 
   sabnzb:
     driver_opts:
       type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume1/sabnzb"
+      o: "addr=truenas01,nolock,soft,rw"
+      device: ":/mnt/DataPool0/sabnzb"
 
   # transmission:
   #   driver_opts:
