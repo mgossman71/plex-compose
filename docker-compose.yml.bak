@@ -1,0 +1,325 @@
+version: "3.3"
+services:
+  d0p1-pub:
+    container_name: "d0p1-pub"
+    image: "plexinc/pms-docker"
+    networks:
+        L3Net:
+           ipv4_address: 192.168.0.2
+    volumes:
+        - /mnt/dockerData/d0p1-pub/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows
+          target: /mnt/TV-Shows
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+          volume:
+             nocopy: true
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+          volume:
+             nocopy: true
+        - type: volume
+          source: JBOD
+          target: /mnt/JBOD
+          volume:
+             nocopy: true
+    environment:
+        - PUID=0
+        - PGID=0
+        - PLEX_CLAIM=claim-2NWg8zPgezkDUa8qE53y
+    restart: always
+
+  d0p2:
+    container_name: "d0p2"
+    image: "plexinc/pms-docker"
+    networks:
+        L3Net:
+           ipv4_address: 192.168.0.3
+    volumes:
+        - /plex2/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows
+          target: /mnt/TV-Shows
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+          volume:
+             nocopy: true
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+          volume:
+             nocopy: true
+        - type: volume
+          source: JBOD
+          target: /mnt/JBOD
+          volume:
+             nocopy: true
+    environment:
+        - PUID=0
+        - PGID=0
+        - PLEX_CLAIM=claim-cxzTih4Z8SsGWMcENtQA
+    restart: always
+
+  sabnzbd:
+      container_name: "sabnzbd"
+      image: "linuxserver/sabnzbd"
+      volumes:
+        - /sabnzb/config:/config
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+      environment:
+        - PUID=0
+        - PGID=0
+      networks:
+        L3Net:
+           ipv4_address: 192.168.0.4
+      restart: always 
+
+  sonarr:
+      container_name: "sonarr"
+      image: "linuxserver/sonarr"
+      volumes:
+        - /sonarr/config:/config
+        - type: volume
+          source: TV-Shows
+          target: /mnt/TV-Shows
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+        - type: volume
+          source: JBOD
+          target: /mnt/JBOD
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+      environment:
+        - PUID=0
+        - PGID=0
+      networks:
+        L3Net:
+           ipv4_address: 192.168.0.5
+      restart: always     
+
+  radarr:
+      container_name: "radarr"
+      image: "linuxserver/radarr"
+      volumes:
+        - /radarr/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+      environment:
+        - PUID=0
+        - PGID=0
+      networks:
+        L3Net:
+           ipv4_address: 192.168.0.6
+      restart: always     
+
+  jackett:
+      container_name: "jacket"
+      image: "linuxserver/jackett"
+      volumes:
+        - /jackett/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+          #environment:
+              #- PUID=0
+              #- PGID=0
+      networks:
+        L3Net:
+           ipv4_address: 192.168.0.7
+      restart: always
+
+  transmission:
+      container_name: "transmission"
+      image: "linuxserver/transmission"
+      volumes:
+        - /transmission/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: transmission
+          target: /downloads
+      environment:
+        - PUID=0
+        - PGID=0
+      networks:
+        L3Net:
+           ipv4_address: 192.168.0.8
+      restart: always
+
+  homebridge:
+     container_name: "homebridge"
+     image: oznu/homebridge:latest
+     volumes:
+       - /homebridge:/homebridge
+     logging:
+       driver: json-file
+       options:
+         max-size: "10mb"
+         max-file: "1"
+     environment:
+        - PUID=0
+        - PGID=0
+     networks:
+        L2Net:
+           ipv4_address: 10.0.0.141
+     restart: always      
+
+  homeAssistant:
+     container_name: "homeAssistant"
+     image: ghcr.io/home-assistant/home-assistant:stable
+     volumes:
+       - /homeAssistant:/config
+     environment:
+        - PUID=0
+        - PGID=0
+     networks:
+        L2Net:
+           ipv4_address: 10.0.0.142   
+     restart: always      
+     
+  ombi:
+      container_name: "ombi"
+      image: "lscr.io/linuxserver/ombi"
+      volumes:
+        - /ombi-config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+        - type: volume
+          source: JBOD
+          target: /mnt/JBOD
+      environment:
+        - PUID=0
+        - PGID=0
+      networks:
+        L2Net:
+           ipv4_address: 10.0.0.143     
+      restart: always
+
+  jellyfin:
+    container_name: "jellyfin"
+    image: "jellyfin/jellyfin"
+    networks:
+        L2Net:
+           ipv4_address: 10.0.0.144
+    volumes:
+        - /jellyfin/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows
+          target: /mnt/TV-Shows
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+          volume:
+             nocopy: true
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+          volume:
+             nocopy: true
+        - type: volume
+          source: JBOD
+          target: /mnt/JBOD
+          volume:
+             nocopy: true
+    environment:
+        - PUID=0
+        - PGID=0
+    restart: always
+
+volumes:
+  Movies:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/Movies"
+  TV-Shows:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/TV-Shows"
+  TV-Shows1:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/TV-Shows1"
+  sabnzb:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/sabnzb"
+
+  transmission:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/sabnzb/transmission"
+
+  JBOD:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume2/JBOD0/TV-Archive"
+ 
+networks:
+    L2Net:    
+       driver: ipvlan
+       driver_opts:
+          parent: ens192
+          ipvlan_mode: l2
+       ipam:
+         config:
+            - subnet: 10.0.0.0/24
+    L3Net:
+       driver: ipvlan
+       driver_opts:
+          parent: ens160
+          ipvlan_mode: l3
+       ipam:
+          config:
+             - subnet: 192.168.0.0/24
+
+
