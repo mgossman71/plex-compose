@@ -215,29 +215,29 @@ services:
            ipv4_address: 10.0.0.142
      restart: always
 
-  ombi:
-      container_name: "ombi"
-      image: "linuxserver/ombi"
-      ports:
-        - 3579:3579
-      volumes:
-        - /ombi-config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-        - type: volume
-          source: TV-Shows1
-          target: /mnt/TV-Shows1
-        - type: volume
-          source: JBOD-TV
-          target: /mnt/JBOD-TV
-        - type: volume
-          source: JBOD-Movie
-          target: /mnt/JBOD-Movie
-      environment:
-        - PUID=0
-        - PGID=0
-      restart: always
+#  ombi:
+#      container_name: "ombi"
+#      image: "linuxserver/ombi"
+#      ports:
+#        - 3579:3579
+#      volumes:
+#        - /ombi-config:/config
+#        - type: volume
+#          source: Movies
+#          target: /mnt/Movies
+#        - type: volume
+#          source: TV-Shows1
+#          target: /mnt/TV-Shows1
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
+#      environment:
+#        - PUID=0
+#        - PGID=0
+#      restart: always
 
 volumes:
   Movies:
