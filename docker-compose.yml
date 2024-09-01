@@ -27,16 +27,16 @@ services:
           target: /mnt/sabnzb
           volume:
              nocopy: true
-        - type: volume
-          source: JBOD-TV
-          target: /mnt/JBOD-TV
-          volume:
-             nocopy: true
-        - type: volume
-          source: JBOD-Movie
-          target: /mnt/JBOD-Movie
-          volume:
-             nocopy: true
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#          volume:
+#             nocopy: true
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
+#          volume:
+#             nocopy: true
     environment:
         - PUID=568
         - PGID=100
@@ -69,16 +69,16 @@ services:
           target: /mnt/sabnzb
           volume:
              nocopy: true
-        - type: volume
-          source: JBOD-TV
-          target: /mnt/JBOD-TV
-          volume:
-             nocopy: true
-        - type: volume
-          source: JBOD-Movie
-          target: /mnt/JBOD-Movie
-          volume:
-             nocopy: true
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#          volume:
+#             nocopy: true
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
+#          volume:
+#             nocopy: true
     environment:
         - PUID=568
         - PGID=100
@@ -115,12 +115,12 @@ services:
         - type: volume
           source: TV-Shows1
           target: /mnt/TV-Shows1
-        - type: volume
-          source: JBOD-TV
-          target: /mnt/JBOD-TV
-        - type: volume
-          source: JBOD-Movie
-          target: /mnt/JBOD-Movie
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
         - type: volume
           source: sabnzb
           target: /mnt/sabnzb
@@ -141,9 +141,9 @@ services:
         - type: volume
           source: sabnzb
           target: /mnt/sabnzb
-        - type: volume
-          source: JBOD-Movie
-          target: /mnt/JBOD-Movie
+  #      - type: volume
+  #        source: JBOD-Movie
+  #        target: /mnt/JBOD-Movie
       environment:
         - PUID=568
         - PGID=100
@@ -270,17 +270,17 @@ volumes:
   #     o: "addr=synology0,nolock,soft,rw"
   #     device: ":/volume1/sabnzb/transmission"
 
-  JBOD-TV:
-    driver_opts:
-      type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume2/JBOD0/TV-Archive"
-
-  JBOD-Movie:
-    driver_opts:
-      type: "nfs"
-      o: "addr=synology0,nolock,soft,rw"
-      device: ":/volume2/JBOD0/Movie-Archive"
+#  JBOD-TV:
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=synology0,nolock,soft,rw"
+#      device: ":/volume2/JBOD0/TV-Archive"
+#
+#  JBOD-Movie:
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=synology0,nolock,soft,rw"
+#      device: ":/volume2/JBOD0/Movie-Archive"
 
 networks:
     L2Net:
