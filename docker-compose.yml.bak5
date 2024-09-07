@@ -3,9 +3,6 @@ services:
   d0p1:
     container_name: "d0p1"
     image: "plexinc/pms-docker"
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.110    
     ports:
         - 32400:32400
     volumes:
@@ -30,13 +27,21 @@ services:
           target: /mnt/sabnzb
           volume:
              nocopy: true
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#          volume:
+#             nocopy: true
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
+#          volume:
+#             nocopy: true
     environment:
         - PUID=568
         - PGID=100
         - PLEX_CLAIM=claim-BKaBwYE3Es_wgRZy9PAU
     restart: always
-
-
   d0p2:
     container_name: "d0p2"
     image: "plexinc/pms-docker"
@@ -64,13 +69,21 @@ services:
           target: /mnt/sabnzb
           volume:
              nocopy: true
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#          volume:
+#             nocopy: true
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
+#          volume:
+#             nocopy: true
     environment:
         - PUID=568
         - PGID=100
         - PLEX_CLAIM=claim-3CLpiLWs2QywWYoJb9BV
     restart: always
-
-
   sabnzbd:
       container_name: "sabnzbd"
       image: "linuxserver/sabnzbd"
@@ -102,6 +115,12 @@ services:
         - type: volume
           source: TV-Shows1
           target: /mnt/TV-Shows1
+#        - type: volume
+#          source: JBOD-TV
+#          target: /mnt/JBOD-TV
+#        - type: volume
+#          source: JBOD-Movie
+#          target: /mnt/JBOD-Movie
         - type: volume
           source: sabnzb
           target: /mnt/sabnzb
@@ -109,8 +128,6 @@ services:
         - PUID=568
         - PGID=100
       restart: always
-
-
   radarr:
       container_name: "radarr"
       image: "linuxserver/radarr"
@@ -124,11 +141,13 @@ services:
         - type: volume
           source: sabnzb
           target: /mnt/sabnzb
+  #      - type: volume
+  #        source: JBOD-Movie
+  #        target: /mnt/JBOD-Movie
       environment:
         - PUID=568
         - PGID=100
       restart: always
-
   # jackett:
   #     container_name: "jacket"
   #     image: "linuxserver/jackett"
