@@ -38,8 +38,9 @@ services:
   d0p2:
     container_name: "d0p2"
     image: "plexinc/pms-docker"
-    ports:
-        - 32401:32400
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.111
     volumes:
         - /plex2/config:/config
         - type: volume
