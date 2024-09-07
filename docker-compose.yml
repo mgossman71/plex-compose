@@ -250,18 +250,6 @@ volumes:
   #     o: "addr=synology0,nolock,soft,rw"
   #     device: ":/volume1/sabnzb/transmission"
 
-#  JBOD-TV:
-#    driver_opts:
-#      type: "nfs"
-#      o: "addr=synology0,nolock,soft,rw"
-#      device: ":/volume2/JBOD0/TV-Archive"
-#
-#  JBOD-Movie:
-#    driver_opts:
-#      type: "nfs"
-#      o: "addr=synology0,nolock,soft,rw"
-#      device: ":/volume2/JBOD0/Movie-Archive"
-
 networks:
     L2Net:
        driver: ipvlan
