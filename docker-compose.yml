@@ -5,7 +5,7 @@ services:
     image: "plexinc/pms-docker"
     networks:
       L2Net:
-        ipv4_address: 10.0.0.110    
+        ipv4_address: 10.0.0.110
     volumes:
         - /plex1/config:/config
         - type: volume
