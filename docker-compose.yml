@@ -128,42 +128,6 @@ services:
         - PGID=100
       restart: always
 
-  # jackett:
-  #     container_name: "jacket"
-  #     image: "linuxserver/jackett"
-  #     ports:
-  #       - 9117:9117
-  #     volumes:
-  #       - /jackett/config:/config
-  #       - type: volume
-  #         source: Movies
-  #         target: /mnt/Movies
-  #       - type: volume
-  #         source: sabnzb
-  #         target: /mnt/sabnzb
-  #         #environment:
-  #             #- PUID=0
-  #             #- PGID=0
-  #     restart: always
-
-  # transmission:
-  #     container_name: "transmission"
-  #     image: "linuxserver/transmission"
-  #     ports:
-  #       - 9091:9091
-  #     volumes:
-  #       - /transmission/config:/config
-  #       - type: volume
-  #         source: Movies
-  #         target: /mnt/Movies
-  #       - type: volume
-  #         source: transmission
-  #         target: /downloads
-  #     environment:
-  #       - PUID=0
-  #       - PGID=0
-  #     restart: always
-
   homebridge:
      container_name: "homebridge"
      image: homebridge/homebridge:latest
@@ -195,29 +159,21 @@ services:
            ipv4_address: 10.0.0.142
      restart: always
 
-#  ombi:
-#      container_name: "ombi"
-#      image: "linuxserver/ombi"
-#      ports:
-#        - 3579:3579
-#      volumes:
-#        - /ombi-config:/config
-#        - type: volume
-#          source: Movies
-#          target: /mnt/Movies
-#        - type: volume
-#          source: TV-Shows1
-#          target: /mnt/TV-Shows1
-#        - type: volume
-#          source: JBOD-TV
-#          target: /mnt/JBOD-TV
-#        - type: volume
-#          source: JBOD-Movie
-#          target: /mnt/JBOD-Movie
-#      environment:
-#        - PUID=0
-#        - PGID=0
-#      restart: always
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.112
+    environment:
+      TZ: 'America/Chicago'
+      WEBPASSWORD: 'tmpPassword'
+    # Volumes store your data between container upgrades
+    volumes:
+      - '/etc-pihole:/etc/pihole'
+      - '/etc-dnsmasq.d:/etc/dnsmasq.d'
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    restart: unless-stopped
 
 volumes:
   Movies:
@@ -243,12 +199,6 @@ volumes:
       type: "nfs"
       o: "addr=synology0,nolock,soft,rw"
       device: ":/volume1/sabnzb"
-
-  # transmission:
-  #   driver_opts:
-  #     type: "nfs"
-  #     o: "addr=synology0,nolock,soft,rw"
-  #     device: ":/volume1/sabnzb/transmission"
 
 networks:
     L2Net:
