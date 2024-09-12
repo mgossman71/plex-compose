@@ -159,21 +159,21 @@ services:
            ipv4_address: 10.0.0.142
      restart: always
 
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.112
-    environment:
-      TZ: 'America/Chicago'
-      WEBPASSWORD: 'tmpPassword'
-    # Volumes store your data between container upgrades
-    volumes:
-      - '/etc-pihole:/etc/pihole'
-      - '/etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    restart: unless-stopped
+#  pihole:
+#    container_name: pihole
+#    image: pihole/pihole:latest
+#    networks:
+#      L2Net:
+#        ipv4_address: 10.0.0.112
+#    environment:
+#      TZ: 'America/Chicago'
+#      WEBPASSWORD: 'tmpPassword'
+#    # Volumes store your data between container upgrades
+#    volumes:
+#      - '/etc-pihole:/etc/pihole'
+#      - '/etc-dnsmasq.d:/etc/dnsmasq.d'
+#    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+#    restart: unless-stopped
 
 volumes:
   Movies:
