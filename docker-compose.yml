@@ -34,7 +34,6 @@ services:
         - PLEX_CLAIM=claim-BKaBwYE3Es_wgRZy9PAU
     restart: always
 
-
   d0p2:
     container_name: "d0p2"
     image: "plexinc/pms-docker"
@@ -68,7 +67,6 @@ services:
         - PGID=100
         - PLEX_CLAIM=claim-3CLpiLWs2QywWYoJb9BV
     restart: always
-
 
   sabnzbd:
       container_name: "sabnzbd"
@@ -108,7 +106,6 @@ services:
         - PUID=568
         - PGID=100
       restart: always
-
 
   radarr:
       container_name: "radarr"
@@ -174,6 +171,13 @@ services:
 #      - '/etc-dnsmasq.d:/etc/dnsmasq.d'
 #    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
 #    restart: unless-stopped
+
+  gozznet:
+    container_name: gozznet
+    image: mgossman71/gozznet-old:17.4
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.13
 
 volumes:
   Movies:
