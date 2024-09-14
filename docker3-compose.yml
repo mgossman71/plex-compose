@@ -63,7 +63,7 @@ networks:
     L2Net:
        driver: ipvlan
        driver_opts:
-          parent: ens192
+          parent: ens34
           ipvlan_mode: l2
        ipam:
          config:
