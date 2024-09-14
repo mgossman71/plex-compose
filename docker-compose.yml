@@ -34,40 +34,6 @@ services:
         - PLEX_CLAIM=claim-BKaBwYE3Es_wgRZy9PAU
     restart: always
 
-  d0p2:
-    container_name: "d0p2"
-    image: "plexinc/pms-docker"
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.111
-    volumes:
-        - /plex2/config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-          volume:
-             nocopy: true
-        - type: volume
-          source: TV-Shows
-          target: /mnt/TV-Shows
-          volume:
-             nocopy: true
-        - type: volume
-          source: TV-Shows1
-          target: /mnt/TV-Shows1
-          volume:
-             nocopy: true
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-          volume:
-             nocopy: true
-    environment:
-        - PUID=568
-        - PGID=100
-        - PLEX_CLAIM=claim-3CLpiLWs2QywWYoJb9BV
-    restart: always
-
   sabnzbd:
       container_name: "sabnzbd"
       image: "linuxserver/sabnzbd"
@@ -124,53 +90,6 @@ services:
         - PUID=568
         - PGID=100
       restart: always
-
-  homebridge:
-     container_name: "homebridge"
-     image: homebridge/homebridge:latest
-     networks:
-       L2Net:
-          ipv4_address: 10.0.0.141
-     volumes:
-       - /homebridge:/homebridge
-     logging:
-       driver: json-file
-       options:
-         max-size: "10mb"
-         max-file: "1"
-     environment:
-        - PUID=0
-        - PGID=0
-     restart: always
-
-#  homeAssistant:
-#     container_name: "homeAssistant"
-#     image: ghcr.io/home-assistant/home-assistant:stable
-#     volumes:
-#       - /homeAssistant:/config
-#     environment:
-#        - PUID=0
-#        - PGID=0
-#     networks:
-#        L2Net:
-#           ipv4_address: 10.0.0.142
-#     restart: always
-
-#  pihole:
-#    container_name: pihole
-#    image: pihole/pihole:latest
-#    networks:
-#      L2Net:
-#        ipv4_address: 10.0.0.112
-#    environment:
-#      TZ: 'America/Chicago'
-#      WEBPASSWORD: 'tmpPassword'
-#    # Volumes store your data between container upgrades
-#    volumes:
-#      - '/etc-pihole:/etc/pihole'
-#      - '/etc-dnsmasq.d:/etc/dnsmasq.d'
-#    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-#    restart: unless-stopped
 
   gozznet:
     container_name: gozznet
