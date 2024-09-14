@@ -1,39 +1,5 @@
 version: "3.3"
 services:
-  d0p1:
-    container_name: "d0p1"
-    image: "plexinc/pms-docker"
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.110
-    volumes:
-        - /plex1/config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-          volume:
-             nocopy: true
-        - type: volume
-          source: TV-Shows
-          target: /mnt/TV-Shows
-          volume:
-             nocopy: true
-        - type: volume
-          source: TV-Shows1
-          target: /mnt/TV-Shows1
-          volume:
-             nocopy: true
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-          volume:
-             nocopy: true
-    environment:
-        - PUID=568
-        - PGID=100
-        - PLEX_CLAIM=claim-BKaBwYE3Es_wgRZy9PAU
-    restart: always
-
   sabnzbd:
       container_name: "sabnzbd"
       image: "linuxserver/sabnzbd"
@@ -132,11 +98,4 @@ networks:
        ipam:
          config:
             - subnet: 10.0.0.0/16
-    L3Net:
-       driver: ipvlan
-       driver_opts:
-          parent: ens160
-          ipvlan_mode: l3
-       ipam:
-          config:
-             - subnet: 192.168.0.0/24
+  
