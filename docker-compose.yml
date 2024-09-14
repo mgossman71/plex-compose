@@ -64,6 +64,16 @@ services:
       L2Net:
         ipv4_address: 10.0.0.13
 
+  smokeping:
+    container_name: smokeping
+    image: lscr.io/linuxserver/smokeping
+    volumes:
+      - /smokeping-config:/config
+      - /smokeping-data:/data 
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.14
+
 volumes:
   Movies:
     driver_opts:
@@ -98,4 +108,3 @@ networks:
        ipam:
          config:
             - subnet: 10.0.0.0/16
-  
