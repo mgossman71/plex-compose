@@ -67,6 +67,7 @@ services:
     volumes:
       - /smokeping-config:/config
       - /smokeping-data:/data
+    restart: always
     networks:
       L2Net:
         ipv4_address: 10.0.0.14
