@@ -57,13 +57,6 @@ services:
         - PGID=100
       restart: always
 
-  gozznet:
-    container_name: gozznet
-    image: mgossman71/gozznet-old:17.5
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.13
-
   smokeping:
     container_name: smokeping
     image: lscr.io/linuxserver/smokeping
