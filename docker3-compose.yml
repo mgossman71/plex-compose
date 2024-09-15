@@ -34,6 +34,13 @@ services:
         - PLEX_CLAIM=claim-BKaBwYE3Es_wgRZy9PAU
     restart: always
 
+  gozznet:
+    container_name: gozznet
+    image: mgossman71/gozznet-old:17.5
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.13
+        
 volumes:
   Movies:
     driver_opts:
