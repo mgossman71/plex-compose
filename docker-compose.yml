@@ -67,9 +67,13 @@ services:
   smokeping:
     container_name: smokeping
     image: lscr.io/linuxserver/smokeping
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ="America/Chicago"
     volumes:
       - /smokeping-config:/config
-      - /smokeping-data:/data 
+      - /smokeping-data:/data
     networks:
       L2Net:
         ipv4_address: 10.0.0.14
