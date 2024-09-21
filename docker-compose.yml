@@ -3,8 +3,6 @@ services:
   sabnzbd:
       container_name: "sabnzbd"
       image: "linuxserver/sabnzbd"
-      ports:
-        - 8080:8080
       volumes:
         - /sabnzb/config:/config
         - type: volume
@@ -13,11 +11,14 @@ services:
         - type: volume
           source: Movies
           target: /mnt/Movies
+      networks:
+        L2Net:
+          ipv4_address: 10.0.0.15
       environment:
         - PUID=0
         - PGID=0
       restart: always
-
+      
   sonarr:
       container_name: "sonarr"
       image: "linuxserver/sonarr"
