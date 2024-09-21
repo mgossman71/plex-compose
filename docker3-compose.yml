@@ -36,11 +36,11 @@ services:
 
   gozznet:
     container_name: gozznet
-    image: mgossman71/gozznet-old:17.5
+    image: mgossman71/gozznet-old
     networks:
       L2Net:
         ipv4_address: 10.0.0.13
-        
+
 volumes:
   Movies:
     driver_opts:
