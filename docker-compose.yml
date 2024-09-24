@@ -18,7 +18,7 @@ services:
         - PUID=0
         - PGID=0
       restart: always
-      
+
   sonarr:
       container_name: "sonarr"
       image: "linuxserver/sonarr"
@@ -47,6 +47,25 @@ services:
         - 7878:7878
       volumes:
         - /radarr/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+      environment:
+        - PUID=568
+        - PGID=100
+      restart: always
+
+  readarr:
+      container_name: "readarr"
+      image: "linuxserver/readarr"
+      networks:
+        L2Net:
+          ipv4_address: 10.0.0.16
+      volumes:
+        - /readarr/config:/config
         - type: volume
           source: Movies
           target: /mnt/Movies
