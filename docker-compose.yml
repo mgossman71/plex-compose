@@ -92,6 +92,25 @@ services:
       L2Net:
         ipv4_address: 10.0.0.14
 
+  transmission:
+      container_name: "transmission"
+      image: "linuxserver/transmission"
+      networks:
+        L2Net:
+          ipv4_address: 10.0.0.17
+      volumes:
+        - /transmission/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: transmission
+          target: /downloads
+      environment:
+        - PUID=0
+        - PGID=0
+      restart: always
+
 volumes:
   Movies:
     driver_opts:
@@ -116,6 +135,12 @@ volumes:
       type: "nfs"
       o: "addr=synology0,nolock,soft,rw"
       device: ":/volume1/sabnzb"
+
+  transmission:
+    driver_opts:
+      type: "nfs"
+      o: "addr=synology0,nolock,soft,rw"
+      device: ":/volume1/sabnzb/transmission"
 
 networks:
     L2Net:
