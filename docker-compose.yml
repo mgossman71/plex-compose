@@ -17,9 +17,6 @@ services:
         - PUID=0
         - PGID=0
       restart: always
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.18
 
   sonarr:
       container_name: "sonarr"
@@ -145,8 +142,11 @@ volumes:
       device: ":/volume1/sabnzb/transmission"
 
 networks:
-  L2Net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.0.0.0/16
+    L2Net:
+       driver: ipvlan
+       driver_opts:
+          parent: ens192
+          ipvlan_mode: l2
+       ipam:
+         config:
+            - subnet: 10.0.0.0/16
