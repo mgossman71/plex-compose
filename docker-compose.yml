@@ -11,9 +11,8 @@ services:
         - type: volume
           source: Movies
           target: /mnt/Movies
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.15
+      ports:
+        - 8080:8080
       environment:
         - PUID=0
         - PGID=0
@@ -36,8 +35,8 @@ services:
           source: sabnzb
           target: /mnt/sabnzb
       environment:
-        - PUID=568
-        - PGID=100
+        - PUID=0
+        - PGID=0
       restart: always
 
   radarr:
@@ -83,7 +82,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ="America/Chicago"
+      - TZ=America/Chicago
     volumes:
       - /smokeping-config:/config
       - /smokeping-data:/data
