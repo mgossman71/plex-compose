@@ -118,6 +118,27 @@ services:
       - PUID=0
       - PGID=0
     restart: always
+
+  ombi:
+      container_name: "ombi"
+      image: "linuxserver/ombi"
+      ports:
+        - 3579:3579
+      volumes:
+        - /ombi-config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+      environment:
+        - PUID=0
+        - PGID=0
+      restart: always
+      networks:
+        L2Net:
+          ipv4_address: 10.0.0.21
       
   gozznet:
     container_name: gozznet
