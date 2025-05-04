@@ -118,6 +118,7 @@ services:
         - PUID=0
         - PGID=0
       restart: always
+      
   gozznet:
     container_name: gozznet
     image: mgossman71/gozznet-old
