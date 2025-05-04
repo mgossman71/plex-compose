@@ -118,6 +118,12 @@ services:
         - PUID=0
         - PGID=0
       restart: always
+  gozznet:
+    container_name: gozznet
+    image: mgossman71/gozznet-old
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.13
 
 volumes:
   Movies:
