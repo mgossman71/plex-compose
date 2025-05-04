@@ -1,89 +1,89 @@
 version: "3.3"
 services:
   sabnzbd:
-      container_name: "sabnzbd"
-      image: "linuxserver/sabnzbd"
-      volumes:
-        - /sabnzb/config:/config
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-      # ports:
-      #   - 8080:8080
-      environment:
-        - PUID=0
-        - PGID=0
-      restart: always
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.18
+    container_name: "sabnzbd"
+    image: "linuxserver/sabnzbd"
+    volumes:
+      - /sabnzb/config:/config
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+    # ports:
+    #   - 8080:8080
+    environment:
+      - PUID=0
+      - PGID=0
+    restart: always
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.18
 
   sonarr:
-      container_name: "sonarr"
-      image: "linuxserver/sonarr"
-      ports:
-        - 8989:8989
-      volumes:
-        - /sonarr/config:/config
-        - type: volume
-          source: TV-Shows
-          target: /mnt/TV-Shows
-        - type: volume
-          source: TV-Shows1
-          target: /mnt/TV-Shows1
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-      environment:
-        - PUID=0
-        - PGID=0
-      restart: always
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.19
+    container_name: "sonarr"
+    image: "linuxserver/sonarr"
+    ports:
+      - 8989:8989
+    volumes:
+      - /sonarr/config:/config
+      - type: volume
+        source: TV-Shows
+        target: /mnt/TV-Shows
+      - type: volume
+        source: TV-Shows1
+        target: /mnt/TV-Shows1
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+    environment:
+      - PUID=0
+      - PGID=0
+    restart: always
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.19
 
   radarr:
-      container_name: "radarr"
-      image: "linuxserver/radarr"
-      ports:
-        - 7878:7878
-      volumes:
-        - /radarr/config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-      environment:
-        - PUID=568
-        - PGID=100
-      restart: always
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.20
+    container_name: "radarr"
+    image: "linuxserver/radarr"
+    ports:
+      - 7878:7878
+    volumes:
+      - /radarr/config:/config
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+    environment:
+      - PUID=568
+      - PGID=100
+    restart: always
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.20
 
   readarr:
-      container_name: "readarr"
-      image: "lscr.io/linuxserver/readarr:develop"
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.16
-      volumes:
-        - /readarr/config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-        - type: volume
-          source: sabnzb
-          target: /mnt/sabnzb
-      environment:
-        - PUID=568
-        - PGID=100
-      restart: always
+    container_name: "readarr"
+    image: "lscr.io/linuxserver/readarr:develop"
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.16
+    volumes:
+      - /readarr/config:/config
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+    environment:
+      - PUID=568
+      - PGID=100
+    restart: always
 
   smokeping:
     container_name: smokeping
@@ -101,23 +101,23 @@ services:
         ipv4_address: 10.0.0.14
 
   transmission:
-      container_name: "transmission"
-      image: "linuxserver/transmission"
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.17
-      volumes:
-        - /transmission/config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-        - type: volume
-          source: transmission
-          target: /downloads
-      environment:
-        - PUID=0
-        - PGID=0
-      restart: always
+    container_name: "transmission"
+    image: "linuxserver/transmission"
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.17
+    volumes:
+      - /transmission/config:/config
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+      - type: volume
+        source: transmission
+        target: /downloads
+    environment:
+      - PUID=0
+      - PGID=0
+    restart: always
       
   gozznet:
     container_name: gozznet
