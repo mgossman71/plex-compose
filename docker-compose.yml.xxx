@@ -28,9 +28,10 @@ services:
     environment:
         - PUID=568
         - PGID=100
-        - PLEX_CLAIM=claim-rm44BamVy3NYF3DmgvEE
-    ports:
-      - 32400:32400
+        - PLEX_CLAIM=claim-YjSbEZ3tq6xJe6aA8uma
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.15
     restart: always
 
 
@@ -128,8 +129,9 @@ services:
       - /smokeping-config:/config
       - /smokeping-data:/data
     restart: always
-    ports:
-      - 80:80
+    networks:
+      L2Net:
+        ipv4_address: 10.0.0.14
 
   transmission:
     container_name: "transmission"
