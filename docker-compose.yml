@@ -93,9 +93,6 @@ services:
       - PUID=568
       - PGID=100
     restart: always
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.20
 
   readarr:
     container_name: "readarr"
