@@ -201,8 +201,8 @@ services:
          max-size: "10mb"
          max-file: "1"
      environment:
-        - PUID=0
-        - PGID=0
+      - PUID=0
+      - PGID=0
      restart: always
 
   gozznet:
