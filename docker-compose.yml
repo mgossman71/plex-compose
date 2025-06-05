@@ -72,9 +72,6 @@ services:
       - PUID=0
       - PGID=0
     restart: always
-    networks:
-      L2Net:
-        ipv4_address: 10.0.0.19
 
   radarr:
     container_name: "radarr"
