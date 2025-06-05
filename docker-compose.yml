@@ -33,7 +33,6 @@ services:
       - 32400:32400
     restart: always
 
-
   sabnzbd:
     container_name: "sabnzbd"
     image: "linuxserver/sabnzbd"
@@ -192,9 +191,8 @@ services:
   overseerr:
      container_name: "overseerr"
      image: sctx/overseerr:latest
-     networks:
-       L2Net:
-          ipv4_address: 10.0.0.14
+     ports:
+      - 5055:5055
      volumes:
        - /overseerr/config:/app/config
      logging:
@@ -206,7 +204,6 @@ services:
         - PUID=0
         - PGID=0
      restart: always
-
 
   gozznet:
     container_name: gozznet
