@@ -192,9 +192,9 @@ services:
      container_name: "overseerr"
      image: sctx/overseerr:latest
      ports:
-       - 5055:5055
+      - 5055:5055
      volumes:
-       - /overseerr/config:/app/config
+      - /overseerr/config:/app/config
      logging:
        driver: json-file
        options:
