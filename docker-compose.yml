@@ -12,8 +12,8 @@ services:
       - /smokeping-data:/data
     restart: always
     ports:
-      - 80:80
-      
+      - 8080:80
+
   overseerr:
      container_name: "overseerr"
      image: sctx/overseerr:latest
