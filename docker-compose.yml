@@ -1,5 +1,37 @@
 version: "3.3"
 services:
+  plex:
+    container_name: "plex"
+    image: "plexinc/pms-docker"
+    volumes:
+        - /plex/config:/config
+        - type: volume
+          source: Movies
+          target: /mnt/Movies
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows
+          target: /mnt/TV-Shows
+          volume:
+             nocopy: true
+        - type: volume
+          source: TV-Shows1
+          target: /mnt/TV-Shows1
+          volume:
+             nocopy: true
+        - type: volume
+          source: sabnzb
+          target: /mnt/sabnzb
+          volume:
+             nocopy: true
+    environment:
+        - PUID=568
+        - PGID=100
+        - PLEX_CLAIM=claim-UZXLzVxFDs9xPa1727BH
+    ports:
+      - 32400:32400
+    restart: always
   smokeping:
     container_name: smokeping
     image: lscr.io/linuxserver/smokeping
