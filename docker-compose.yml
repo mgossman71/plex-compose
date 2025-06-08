@@ -13,7 +13,7 @@ services:
     restart: always
     ports:
       - 80:80
-
+      
   overseerr:
      container_name: "overseerr"
      image: sctx/overseerr:latest
