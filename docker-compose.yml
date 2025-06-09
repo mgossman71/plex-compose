@@ -121,7 +121,7 @@ services:
       - /smokeping-data:/data
     restart: always
     ports:
-      - 8080:80
+      - 8081:80
 
   transmission:
     container_name: "transmission"
