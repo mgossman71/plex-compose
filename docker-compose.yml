@@ -121,7 +121,7 @@ services:
       - /smokeping-data:/data
     restart: always
     ports:
-      - 80:80
+      - 8080:80
 
   transmission:
     container_name: "transmission"
@@ -141,27 +141,6 @@ services:
       - PUID=0
       - PGID=0
     restart: always
-
-  ombi:
-      container_name: "ombi"
-      image: "linuxserver/ombi"
-      ports:
-        - 3579:3579
-      volumes:
-        - /ombi-config:/config
-        - type: volume
-          source: Movies
-          target: /mnt/Movies
-        - type: volume
-          source: TV-Shows1
-          target: /mnt/TV-Shows1
-      environment:
-        - PUID=0
-        - PGID=0
-      restart: always
-      networks:
-        L2Net:
-          ipv4_address: 10.0.0.21
 
   homebridge:
      container_name: "homebridge"
@@ -202,8 +181,8 @@ services:
     container_name: gozznet
     image: mgossman71/gozznet-old
     networks:
-      L2Net:
-        ipv4_address: 10.0.0.13
+    ports:
+      - 80:80
     restart: always
 
 volumes:
